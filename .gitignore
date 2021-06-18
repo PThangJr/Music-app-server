@@ -1,3 +1,5 @@
 node_modules
 note.text
 .env
+yarn.lock
+yarn-error.log
