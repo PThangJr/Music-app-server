@@ -4,12 +4,16 @@ const createError = require('http-errors');
 const authorsModel = require('../models/authorsModel');
 const singersModel = require('../models/singersModel');
 const shortid = require('shortid');
+<<<<<<< HEAD
 const categoriesModel = require('../models/categoriesModel');
 const albumsModel = require('../models/albumsModel');
+=======
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 class songsController {
   constructor() {}
   // [GET] get all songs
   async getSongs(req, res, next) {
+<<<<<<< HEAD
     // const { limit, page } = req.params;
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
@@ -63,6 +67,16 @@ class songsController {
     // const totalItems = await songsModel.find().countDocuments();
     // const totalPages = Math.ceil(totalItems / limit);
     // res.status(200).json({ songs, pagination: { totalPages, limit, page } });
+=======
+    const songs = await songsModel
+      .find()
+      .paginate(req)
+      .populate({ path: 'singers' })
+      .populate({ path: 'authors' })
+      .populate({ path: 'categories' })
+      .populate({ path: 'albums' });
+    res.status(200).json({ songs });
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
   }
   // [GET] get top 10 songs
   async getSongsOfRanking(req, res, next) {
@@ -151,6 +165,7 @@ class songsController {
   async updateSong(req, res, next) {
     try {
       const { songId } = req.params;
+<<<<<<< HEAD
       const singers = await singersModel.find({ _id: req.body.singers });
 
       // Convert singer's name to string
@@ -170,6 +185,10 @@ class songsController {
       };
       const songUpdated = await songsModel.findByIdAndUpdate(songId, update);
       res.status(200).json({ songUpdated, message: 'Update Song successfully' });
+=======
+      const songUpdated = await songsModel.findByIdAndUpdate(songId, { ...req.body });
+      res.status(201).json({ songUpdated, message: 'Update Song successfully' });
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
     } catch (error) {
       next(error);
     }
@@ -179,7 +198,11 @@ class songsController {
     try {
       const { songId } = req.params;
       const songDeleted = await songsModel.findByIdAndDelete(songId);
+<<<<<<< HEAD
       res.status(200).json({ songDeleted, message: 'Delete Song successfully' });
+=======
+      res.status(201).json({ songDeleted, message: 'Delete Song successfully' });
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
     } catch (error) {
       next(error);
     }

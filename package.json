@@ -21,7 +21,11 @@
     "slugify": "^1.5.3"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "dotenv": "^9.0.2",
     "nodemon": "^2.0.7"
+=======
+    "dotenv": "^9.0.2"
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
   }
 }

@@ -7,6 +7,7 @@ class singersController {
   // [GET] get signers
   async getSingers(req, res, next) {
     try {
+<<<<<<< HEAD
       const singers = await singersModel.find().paginate(req).sort({ name: 1, linkImage: 1 });
       res.status(200).json(singers);
     } catch (error) {
@@ -23,6 +24,9 @@ class singersController {
           },
         })
         .paginate(req);
+=======
+      const singers = await singersModel.find();
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
       res.status(200).json(singers);
     } catch (error) {
       next(error);

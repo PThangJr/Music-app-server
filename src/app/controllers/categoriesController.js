@@ -20,6 +20,7 @@ class categoriesController {
       next(error);
     }
   }
+<<<<<<< HEAD
   // [PUT] update category
   async updateCategory(req, res, next) {
     try {
@@ -36,5 +37,7 @@ class categoriesController {
       next(error);
     }
   }
+=======
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 }
 module.exports = new categoriesController();

@@ -24,7 +24,10 @@ songsSchema.query.paginate = function (req) {
   let { limit, page } = req.query;
   limit = parseInt(limit);
   page = parseInt(page) || 1;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
   if (page) {
     const skip = limit * (page - 1);
     return this.limit(limit).skip(skip);
@@ -32,5 +35,8 @@ songsSchema.query.paginate = function (req) {
     return this;
   }
 };
+<<<<<<< HEAD
 songsSchema.index({ name: 'text' }, { default_language: 'none' });
+=======
+>>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 module.exports = mongoose.model('songs', songsSchema);
