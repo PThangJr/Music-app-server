@@ -10,7 +10,6 @@ class songsController {
   constructor() {}
   // [GET] get all songs
   async getSongs(req, res, next) {
-
     // const { limit, page } = req.params;
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);

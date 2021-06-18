@@ -49,10 +49,6 @@ class AuthsController {
   }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 const createAccessToken = (user) => {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
 };

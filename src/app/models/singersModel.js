@@ -14,7 +14,6 @@ const singersSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-<<<<<<< HEAD
 singersSchema.query.paginate = function (req) {
   let { limit, page } = req.query;
   limit = parseInt(limit);
@@ -28,6 +27,4 @@ singersSchema.query.paginate = function (req) {
 };
 singersSchema.index({ name: 'text' });
 
-=======
->>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 module.exports = mongoose.model('singers', singersSchema);

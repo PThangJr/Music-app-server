@@ -4,15 +4,11 @@ const playlistsModel = require('../models/playlistsModel');
 const songsModel = require('../models/songsModel');
 const singersModel = require('../models/singersModel');
 const createError = require('http-errors');
-<<<<<<< HEAD
 const categoriesModel = require('../models/categoriesModel');
-=======
->>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 class albumsController {
   constructor() {}
   // [GET] get all categories
   async getAlbums(req, res, next) {
-<<<<<<< HEAD
     // try {
 
     //   const albums = await albumsModel
@@ -57,19 +53,6 @@ class albumsController {
         });
       })
       .catch(next);
-=======
-    try {
-      const albums = await albumsModel
-        .find()
-        .paginate(req)
-        .populate({ path: 'singers' })
-        .populate({ path: 'playlists' });
-
-      res.status(200).json({ albums });
-    } catch (error) {
-      next(error);
-    }
->>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
   }
   // [GET] get songs of album
   async getSongsOfAlbum(req, res, next) {
@@ -125,11 +108,7 @@ class albumsController {
       next(error);
     }
   }
-<<<<<<< HEAD
   // [POST] create a new album
-=======
-  // [POST] create a new category
->>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
   async createAlbum(req, res, next) {
     try {
       const newAlbum = new albumsModel({
@@ -142,7 +121,6 @@ class albumsController {
       next(error);
     }
   }
-<<<<<<< HEAD
 
   //[DELETE] Delete a album
   async deleteAlbum(req, res, next) {
@@ -173,7 +151,5 @@ class albumsController {
       next(error);
     }
   }
-=======
->>>>>>> 2ce6598d3fe2317b687e8360f000b2ad085da272
 }
 module.exports = new albumsController();
