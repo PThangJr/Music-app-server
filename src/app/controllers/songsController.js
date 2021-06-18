@@ -3,7 +3,6 @@ const slugify = require('slugify');
 const createError = require('http-errors');
 const authorsModel = require('../models/authorsModel');
 const singersModel = require('../models/singersModel');
-const shortid = require('shortid');
 const categoriesModel = require('../models/categoriesModel');
 const albumsModel = require('../models/albumsModel');
 class songsController {
