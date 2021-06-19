@@ -3,7 +3,7 @@ const search = require('../app/helpers/search');
 
 const router = express.Router();
 
-router.post('/', search);
 router.get('/', search);
+router.post('/', search);
 
 module.exports = router;
