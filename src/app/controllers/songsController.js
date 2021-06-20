@@ -8,7 +8,7 @@ const albumsModel = require('../models/albumsModel');
 class songsController {
   constructor() {}
   // [GET] get all songs
-  async getSongs(req, res, next) {
+  getSongs(req, res, next) {
     // const { limit, page } = req.params;
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
@@ -17,7 +17,8 @@ class songsController {
     const categoryQuery = categoriesModel.findOne({ slug: category });
     const albumQuery = albumsModel.findOne({ slug: album });
     const singerQuery = singersModel.findOne({ slug: singer });
-    Promise.all([categoryQuery, albumQuery, singerQuery])
+    const queryArr = [categoryQuery, albumQuery, singerQuery];
+    Promise.all(queryArr)
       .then((results) => {
         const [categoryResult, albumResult, singerResult] = results;
         if (categoryResult) {
@@ -112,7 +113,20 @@ class songsController {
       next(error);
     }
   }
+  //[GET]
 
+  getSongOfCategories(req, res, next) {
+    const { categorySlug } = req.params;
+    categoriesModel
+      .findOne({ slug: categorySlug })
+      .then((category) => {
+        return songsModel.find({ categories: category });
+      })
+      .then((songs) => {
+        res.status(200).json({ songs });
+      })
+      .catch(next);
+  }
   // [PUT] update a new song
   async createSong(req, res, next) {
     try {

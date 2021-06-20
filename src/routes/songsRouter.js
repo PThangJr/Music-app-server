@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/', songsController.getSongs);
 router.get('/singer/:slug', songsController.getSongBySingers);
+router.get('/category/:categorySlug', songsController.getSongOfCategories);
 router.get('/ranking', songsController.getSongsOfRanking);
 router.get('/:slug', songsController.getSongBySlug);
 
