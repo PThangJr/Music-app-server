@@ -21,20 +21,25 @@ class albumsController {
     // } catch (error) {
     //   next(error);
     // }
-    let { category, playlist, limit, page } = req.query;
+    let { category, playlist, limit, page, singer } = req.query;
     limit = parseInt(limit);
     page = parseInt(page);
     const query = {};
     const categoryQuery = categoriesModel.findOne({ slug: category });
     const playlistQuery = playlistsModel.findOne({ slug: playlist });
-    Promise.all([categoryQuery, playlistQuery])
+    const singerQuery = singersModel.findOne({ slug: singer });
+    const queryArr = [categoryQuery, playlistQuery, singerQuery];
+    Promise.all(queryArr)
       .then((results) => {
-        const [categoryResult, playlistResult] = results;
+        const [categoryResult, playlistResult, singerResult] = results;
         if (categoryResult) {
-          query.categories = categoryResult;
+          query.categories = categoryResult._id;
         }
         if (playlistResult) {
-          query.playlists = playlistResult;
+          query.playlists = playlistResult._id;
+        }
+        if (singerResult) {
+          query.singers = singerResult._id;
         }
         return query;
       })
@@ -84,9 +89,6 @@ class albumsController {
         .paginate(req)
         .populate({ path: 'singers' })
         .populate({ path: 'playlists' });
-      if (!albums.length) {
-        throw createError(404, 'Không tồn tại bài hát!');
-      }
 
       res.status(200).json({ albums });
     } catch (error) {
@@ -136,13 +138,14 @@ class albumsController {
   async updateAlbum(req, res, next) {
     try {
       const { albumId } = req.params;
-      const { name, linkImage, playlists, categories } = req.body;
+      const { name, linkImage, playlists, categories, singers } = req.body;
       //Update
       const update = {
         name,
         linkImage,
         playlists,
         categories,
+        singers,
         slug: slugify(name, { lower: true, locale: 'vi' }),
       };
       const albumUpdated = await albumsModel.findByIdAndUpdate({ _id: albumId }, update);

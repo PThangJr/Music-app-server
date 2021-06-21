@@ -32,8 +32,8 @@ class singersController {
   async getSingerBySlug(req, res, next) {
     try {
       const { slug } = req.params;
-      const singers = await singersModel.findOne({ slug }).populate({ path: 'songs' });
-      res.status(200).json(singers);
+      const singer = await singersModel.findOne({ slug }).populate({ path: 'songs' });
+      res.status(200).json({ singer });
     } catch (error) {
       next(error);
     }
