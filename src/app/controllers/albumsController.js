@@ -47,6 +47,7 @@ class albumsController {
         const albumsQuery = albumsModel
           .find(query)
           .paginate(req)
+          .sort({ createdAt: 1 })
           .populate({ path: 'singers' })
           .populate({ path: 'playlists' })
           .populate({ path: 'categories' });
@@ -70,6 +71,7 @@ class albumsController {
       const songs = await songsModel
         .find({ albums: album._id })
         .paginate(req)
+        .sort({ slug: 1 })
         .populate({ path: 'singers' })
         .populate({ path: 'authors' })
         .populate({ path: 'categories' })
@@ -102,6 +104,7 @@ class albumsController {
       const playlist = await playlistsModel.findOne({ slug: playlistSlug });
       const albums = await albumsModel
         .find({ playlists: playlist._id })
+        .sort({ createdAt: 1 })
         .paginate(req)
         .populate({ path: 'singers' })
         .populate({ path: 'playlists' });

@@ -3,7 +3,6 @@ const albumsModel = require('../models/albumsModel');
 const singersModel = require('../models/singersModel');
 const search = (req, res, next) => {
   let keyword = req.body.keyword || req.query.keyword || '';
-
   const keywordLength = keyword.split(' ').length;
   let queryParams = {};
   if (keywordLength === 1) {
