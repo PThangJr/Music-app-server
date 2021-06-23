@@ -33,8 +33,9 @@ const search = (req, res, next) => {
 
       if (singers.length) {
         const singersId = singers.map((singer) => singer._id);
+        const songsId = songs.map((song) => song._id);
         songsModel
-          .find({ singers: { $in: singersId } })
+          .find({ singers: { $in: singersId }, _id: { $nin: songsId } })
           .populate('singers')
           .paginate(req)
           .then((songsOfSingers) => {

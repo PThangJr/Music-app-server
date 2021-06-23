@@ -71,7 +71,7 @@ class albumsController {
       const songs = await songsModel
         .find({ albums: album._id })
         .paginate(req)
-        .sort({ slug: 1 })
+        // .sort({ slug: 1 })
         .populate({ path: 'singers' })
         .populate({ path: 'authors' })
         .populate({ path: 'categories' })
