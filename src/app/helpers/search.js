@@ -36,6 +36,7 @@ const search = (req, res, next) => {
         const songsId = songs.map((song) => song._id);
         songsModel
           .find({ singers: { $in: singersId }, _id: { $nin: songsId } })
+          .sort({name: 1})
           .populate('singers')
           .paginate(req)
           .then((songsOfSingers) => {
