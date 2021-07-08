@@ -7,8 +7,14 @@ class singersController {
   // [GET] get signers
   async getSingers(req, res, next) {
     try {
+      // const {limit, page} = req.query;
+      const limit = parseInt(req.query.limit);
+      const page = parseInt(req.query.page);
       const singers = await singersModel.find().paginate(req).sort({ name: 1, linkImage: 1 });
-      res.status(200).json(singers);
+      const totalItems = await singersModel.find().countDocuments();
+      const totalPages = Math.ceil(totalItems / limit);
+
+      res.status(200).json({ singers, pagination: { totalPages, limit, page } });
     } catch (error) {
       next(error);
     }

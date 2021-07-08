@@ -66,6 +66,8 @@ class songsController {
   }
   // [GET] get top 10 songs
   async getSongsOfRanking(req, res, next) {
+    const limit = parseInt(req.query.limit);
+    const page = parseInt(req.query.page) || 1;
     const songs = await songsModel
       .find()
       .sort({ views: -1, createdAt: -1 })
@@ -74,7 +76,10 @@ class songsController {
       .populate({ path: 'authors' })
       .populate({ path: 'categories' })
       .populate({ path: 'albums' });
-    res.status(200).json({ songs });
+    const totalItems = await songsModel.find().countDocuments();
+    const totalPages = Math.ceil(totalItems / limit);
+
+    res.status(200).json({ songs, pagination: { totalPages, page, limit } });
   }
   // [GET] get song by slug
   async getSongBySlug(req, res, next) {
